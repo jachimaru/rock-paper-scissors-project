@@ -42,7 +42,7 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame() {
-    for (let i = 1; i < 6; i++) {
+    for (let round = 1; round <= 5; round++) {
         let player = getHumanChoice();
         let computer = getComputerChoice();
         console.log(player);
@@ -58,7 +58,7 @@ function playGame() {
         } else if (win === 0) {
             console.log(`It was a tie! Your score is ${humanScore} and the computer's is ${computerScore}!`);
         }
-        console.log(`Round ${i}!`)
+        console.log(`Round ${round}!`)
     }
 
     if (humanScore === computerScore) {
