@@ -1,8 +1,8 @@
 let humanScore = 0;
 let computerScore = 0;
-let win = 0
-let compChoice = ''
-let playerChoice = ''
+let win = 0;
+let compChoice = '';
+let playerChoice = '';
 const buttonRock = document.querySelector('#buttonRock');
 buttonRock.textContent = 'Rock';
 buttonRock.addEventListener('click', () => {
@@ -60,7 +60,25 @@ function playRound(humanChoice, computerChoice) {
     }
 
     if (humanScore >= 5 || computerScore >= 5) {
-        roundText.textContent = 'The game is over!'
+        roundText.textContent = 'The game is over!';
+        container.innerHTML = `<button id='reset'>Restart Game</button>`;
+        const resetButton = document.querySelector('#reset');
+        resetButton.addEventListener('click', () => {
+            humanScore = 0;
+            computerScore = 0;
+            win = 0;
+            compChoice = '';
+            playerChoice = '';
+            roundText.textContent = ''
+            container.removeChild(resetButton);
+            container.appendChild(buttonRock);
+            container.appendChild(buttonPaper);
+            container.appendChild(buttonScissors);
+            results.textContent = `Player: ${humanScore} | Computer: ${computerScore}`;
+            container.appendChild(results);
+        });
+        resetButton.textContent = 'Restart Game';
+        container.appendChild(resetButton);
     } else if (win === 2) {
         humanScore += 1;
         roundText.textContent = `You won! You chose ${humanChoice}, the computer chose ${computerChoice}`
@@ -69,9 +87,7 @@ function playRound(humanChoice, computerChoice) {
         roundText.textContent = `You lost! You chose ${humanChoice}, the computer chose ${computerChoice}`;
     } else if (win === 0) {
         roundText.textContent = `It was a tie! You chose ${humanChoice}, the computer chose ${computerChoice}`;
-        const resetButton = document.querySelector('#reset');
-        resetButton.textContent = 'Restart Game'
-        container.appendChild(resetButton);
+        
 
     } 
     results.textContent = `Player: ${humanScore} | Computer: ${computerScore}`;
